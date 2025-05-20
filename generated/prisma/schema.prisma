@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid()) @db.Uuid
+  username  String    @unique
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  books     Book[]
+  settings  Setting[]
+}
+
+model Book {
+  id          String     @id @default(uuid()) @db.Uuid
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String     @db.Uuid
+  name        String
+  description String?
+  createdAt   DateTime   @default(now())
+  accounts    Account[]
+  categories  Category[]
+  members     Member[]
+  budgets     Budget[]
+}
+
+model Currency {
+  code          String         @id
+  name          String
+  symbol        String
+  exchangeRate  Decimal
+  accounts      Account[]
+  settings      Setting[]
+  exchangeRates ExchangeRate[]
+}
+
+model Account {
+  id           String        @id @default(uuid()) @db.Uuid
+  book         Book          @relation(fields: [bookId], references: [id])
+  bookId       String        @db.Uuid
+  name         String
+  type         String
+  currency     Currency      @relation(fields: [currencyCode], references: [code])
+  currencyCode String
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
+model Category {
+  id           String        @id @default(uuid()) @db.Uuid
+  book         Book          @relation(fields: [bookId], references: [id])
+  bookId       String        @db.Uuid
+  name         String
+  type         String // "income" o "expense"
+  transactions Transaction[]
+  budgets      Budget[]
+}
+
+model Transaction {
+  id            String       @id @default(uuid()) @db.Uuid
+  account       Account      @relation(fields: [accountId], references: [id])
+  accountId     String       @db.Uuid
+  category      Category     @relation(fields: [categoryId], references: [id])
+  categoryId    String       @db.Uuid
+  amount        Decimal
+  transactionAt DateTime
+  description   String?
+  createdAt     DateTime     @default(now())
+  attachments   Attachment[]
+}
+
+model Member {
+  id     String @id @default(uuid()) @db.Uuid
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId String @db.Uuid
+  name   String
+  role   String // "owner", "editor", "viewer"
+}
+
+model Budget {
+  id         String    @id @default(uuid()) @db.Uuid
+  book       Book      @relation(fields: [bookId], references: [id])
+  bookId     String    @db.Uuid
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String    @db.Uuid
+  amount     Decimal
+  period     String // "monthly", "weekly"
+  startDate  DateTime
+  endDate    DateTime?
+}
+
+model Setting {
+  id                  String    @id @default(uuid()) @db.Uuid
+  user                User      @relation(fields: [userId], references: [id])
+  userId              String    @db.Uuid
+  theme               String    @default("light")
+  currency            Currency? @relation(fields: [currencyCode], references: [code])
+  currencyCode        String?
+  locale              String?
+  notificationEnabled Boolean   @default(true)
+}
+
+model Attachment {
+  id            String      @id @default(uuid()) @db.Uuid
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  transactionId String      @db.Uuid
+  filePath      String
+  createdAt     DateTime    @default(now())
+}
+
+model ExchangeRate {
+  id           String    @id @default(uuid()) @db.Uuid
+  currency     Currency  @relation(fields: [currencyCode], references: [code])
+  currencyCode String
+  rateToBase   Decimal   @db.Decimal(18, 8)
+  validFrom    DateTime
+  validTo      DateTime?
+  source       String
+  createdAt    DateTime  @default(now())
+}
