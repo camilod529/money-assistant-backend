@@ -70,6 +70,23 @@ export type Attachment = $Result.DefaultSelection<Prisma.$AttachmentPayload>
 export type ExchangeRate = $Result.DefaultSelection<Prisma.$ExchangeRatePayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Role: {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+}
+
+export type Role = $Enums.Role
+
+export const Role: typeof $Enums.Role
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -2059,6 +2076,7 @@ export namespace Prisma {
     email: number
     password: number
     createdAt: number
+    role: number
     _all: number
   }
 
@@ -2085,6 +2103,7 @@ export namespace Prisma {
     email?: true
     password?: true
     createdAt?: true
+    role?: true
     _all?: true
   }
 
@@ -2166,6 +2185,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt: Date
+    role: $Enums.Role[]
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2191,6 +2211,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    role?: boolean
     books?: boolean | User$booksArgs<ExtArgs>
     settings?: boolean | User$settingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2202,6 +2223,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2210,6 +2232,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2218,9 +2241,10 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     books?: boolean | User$booksArgs<ExtArgs>
     settings?: boolean | User$settingsArgs<ExtArgs>
@@ -2241,6 +2265,7 @@ export namespace Prisma {
       email: string
       password: string
       createdAt: Date
+      role: $Enums.Role[]
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2671,6 +2696,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly role: FieldRef<"User", 'Role[]'>
   }
     
 
@@ -8826,14 +8852,14 @@ export namespace Prisma {
     id: string | null
     bookId: string | null
     name: string | null
-    role: string | null
+    role: $Enums.Role | null
   }
 
   export type MemberMaxAggregateOutputType = {
     id: string | null
     bookId: string | null
     name: string | null
-    role: string | null
+    role: $Enums.Role | null
   }
 
   export type MemberCountAggregateOutputType = {
@@ -8943,7 +8969,7 @@ export namespace Prisma {
     id: string
     bookId: string
     name: string
-    role: string
+    role: $Enums.Role
     _count: MemberCountAggregateOutputType | null
     _min: MemberMinAggregateOutputType | null
     _max: MemberMaxAggregateOutputType | null
@@ -9014,7 +9040,7 @@ export namespace Prisma {
       id: string
       bookId: string
       name: string
-      role: string
+      role: $Enums.Role
     }, ExtArgs["result"]["member"]>
     composites: {}
   }
@@ -9442,7 +9468,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Member", 'String'>
     readonly bookId: FieldRef<"Member", 'String'>
     readonly name: FieldRef<"Member", 'String'>
-    readonly role: FieldRef<"Member", 'String'>
+    readonly role: FieldRef<"Member", 'Role'>
   }
     
 
@@ -14263,7 +14289,8 @@ export namespace Prisma {
     username: 'username',
     email: 'email',
     password: 'password',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -14441,6 +14468,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Role[]'
+   */
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role'
+   */
+  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -14487,6 +14528,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    role?: EnumRoleNullableListFilter<"User">
     books?: BookListRelationFilter
     settings?: SettingListRelationFilter
   }
@@ -14497,6 +14539,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    role?: SortOrder
     books?: BookOrderByRelationAggregateInput
     settings?: SettingOrderByRelationAggregateInput
   }
@@ -14510,6 +14553,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    role?: EnumRoleNullableListFilter<"User">
     books?: BookListRelationFilter
     settings?: SettingListRelationFilter
   }, "id" | "username" | "email">
@@ -14520,6 +14564,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -14534,6 +14579,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    role?: EnumRoleNullableListFilter<"User">
   }
 
   export type BookWhereInput = {
@@ -14863,7 +14909,7 @@ export namespace Prisma {
     id?: UuidFilter<"Member"> | string
     bookId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
-    role?: StringFilter<"Member"> | string
+    role?: EnumRoleFilter<"Member"> | $Enums.Role
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
   }
 
@@ -14882,7 +14928,7 @@ export namespace Prisma {
     NOT?: MemberWhereInput | MemberWhereInput[]
     bookId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
-    role?: StringFilter<"Member"> | string
+    role?: EnumRoleFilter<"Member"> | $Enums.Role
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
   }, "id">
 
@@ -14903,7 +14949,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Member"> | string
     bookId?: UuidWithAggregatesFilter<"Member"> | string
     name?: StringWithAggregatesFilter<"Member"> | string
-    role?: StringWithAggregatesFilter<"Member"> | string
+    role?: EnumRoleWithAggregatesFilter<"Member"> | $Enums.Role
   }
 
   export type BudgetWhereInput = {
@@ -15162,6 +15208,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
     books?: BookCreateNestedManyWithoutUserInput
     settings?: SettingCreateNestedManyWithoutUserInput
   }
@@ -15172,6 +15219,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
     books?: BookUncheckedCreateNestedManyWithoutUserInput
     settings?: SettingUncheckedCreateNestedManyWithoutUserInput
   }
@@ -15182,6 +15230,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUpdateManyWithoutUserNestedInput
     settings?: SettingUpdateManyWithoutUserNestedInput
   }
@@ -15192,6 +15241,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUncheckedUpdateManyWithoutUserNestedInput
     settings?: SettingUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -15202,6 +15252,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
   }
 
   export type UserUpdateManyMutationInput = {
@@ -15210,6 +15261,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -15218,6 +15270,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
   }
 
   export type BookCreateInput = {
@@ -15548,7 +15601,7 @@ export namespace Prisma {
   export type MemberCreateInput = {
     id?: string
     name: string
-    role: string
+    role: $Enums.Role
     book: BookCreateNestedOneWithoutMembersInput
   }
 
@@ -15556,13 +15609,13 @@ export namespace Prisma {
     id?: string
     bookId: string
     name: string
-    role: string
+    role: $Enums.Role
   }
 
   export type MemberUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     book?: BookUpdateOneRequiredWithoutMembersNestedInput
   }
 
@@ -15570,27 +15623,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MemberCreateManyInput = {
     id?: string
     bookId: string
     name: string
-    role: string
+    role: $Enums.Role
   }
 
   export type MemberUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MemberUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type BudgetCreateInput = {
@@ -15877,6 +15930,14 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type EnumRoleNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type BookListRelationFilter = {
     every?: BookWhereInput
     some?: BookWhereInput
@@ -15903,6 +15964,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -16267,6 +16329,13 @@ export namespace Prisma {
     amount?: SortOrder
   }
 
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
   export type MemberCountOrderByAggregateInput = {
     id?: SortOrder
     bookId?: SortOrder
@@ -16286,6 +16355,16 @@ export namespace Prisma {
     bookId?: SortOrder
     name?: SortOrder
     role?: SortOrder
+  }
+
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -16460,6 +16539,10 @@ export namespace Prisma {
     rateToBase?: SortOrder
   }
 
+  export type UserCreateroleInput = {
+    set: $Enums.Role[]
+  }
+
   export type BookCreateNestedManyWithoutUserInput = {
     create?: XOR<BookCreateWithoutUserInput, BookUncheckedCreateWithoutUserInput> | BookCreateWithoutUserInput[] | BookUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookCreateOrConnectWithoutUserInput | BookCreateOrConnectWithoutUserInput[]
@@ -16494,6 +16577,11 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type UserUpdateroleInput = {
+    set?: $Enums.Role[]
+    push?: $Enums.Role | $Enums.Role[]
   }
 
   export type BookUpdateManyWithoutUserNestedInput = {
@@ -17116,6 +17204,10 @@ export namespace Prisma {
     connect?: BookWhereUniqueInput
   }
 
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
+  }
+
   export type BookUpdateOneRequiredWithoutMembersNestedInput = {
     create?: XOR<BookCreateWithoutMembersInput, BookUncheckedCreateWithoutMembersInput>
     connectOrCreate?: BookCreateOrConnectWithoutMembersInput
@@ -17379,6 +17471,23 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -17536,6 +17645,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
     settings?: SettingCreateNestedManyWithoutUserInput
   }
 
@@ -17545,6 +17655,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
     settings?: SettingUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -17610,13 +17721,13 @@ export namespace Prisma {
   export type MemberCreateWithoutBookInput = {
     id?: string
     name: string
-    role: string
+    role: $Enums.Role
   }
 
   export type MemberUncheckedCreateWithoutBookInput = {
     id?: string
     name: string
-    role: string
+    role: $Enums.Role
   }
 
   export type MemberCreateOrConnectWithoutBookInput = {
@@ -17674,6 +17785,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
     settings?: SettingUpdateManyWithoutUserNestedInput
   }
 
@@ -17683,6 +17795,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
     settings?: SettingUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -17763,7 +17876,7 @@ export namespace Prisma {
     id?: UuidFilter<"Member"> | string
     bookId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
-    role?: StringFilter<"Member"> | string
+    role?: EnumRoleFilter<"Member"> | $Enums.Role
   }
 
   export type BudgetUpsertWithWhereUniqueWithoutBookInput = {
@@ -18581,6 +18694,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
     books?: BookCreateNestedManyWithoutUserInput
   }
 
@@ -18590,6 +18704,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
     books?: BookUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -18638,6 +18753,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUpdateManyWithoutUserNestedInput
   }
 
@@ -18647,6 +18763,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -18872,7 +18989,7 @@ export namespace Prisma {
   export type MemberCreateManyBookInput = {
     id?: string
     name: string
-    role: string
+    role: $Enums.Role
   }
 
   export type BudgetCreateManyBookInput = {
@@ -18935,19 +19052,19 @@ export namespace Prisma {
   export type MemberUpdateWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MemberUncheckedUpdateWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MemberUncheckedUpdateManyWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type BudgetUpdateWithoutBookInput = {
