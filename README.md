@@ -96,3 +96,51 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Roadmap
+1. **Books (Libros)**
+
+   * CRUD de libros: crear, listar, actualizar, eliminar.
+   * Al crear un libro, automáticamente crea el registro de `Member` del creador con rol `ADMIN`.
+   * Rutas protegidas: sólo usuarios autenticados pueden manipular sus libros; usa tu guard de roles para diferenciar entre `ADMIN` y `USER` en acciones sensibles.
+
+2. **Members (Miembros de un libro)**
+
+   * Endpoint para invitar a otro usuario a un libro (crea un `Member`).
+   * Listar miembros de un libro, cambiar roles (owner/editor/viewer), remover miembros.
+   * Validaciones: sólo el `ADMIN` de un libro puede invitar o cambiar permisos.
+
+3. **Accounts (Cuentas)**
+
+   * CRUD de cuentas dentro de un libro.
+   * Cada cuenta tiene un `currencyCode`; valida que exista en `Currency`.
+   * Protege las rutas para que sólo miembros del libro puedan gestionar sus cuentas.
+
+4. **Categories (Categorías)**
+
+   * CRUD de categorías (income/expense) por libro.
+   * Igual protección por rol.
+
+5. **Transactions (Transacciones)**
+
+   * CRUD de transacciones: al crear, recibe `accountId`, `categoryId`, `amount`, `transactionAt`, etc.
+   * Al crear o listar, aplica la lógica de tipo de cambio si la cuenta no está en moneda base.
+   * Endpoints para reportes básicos (por fecha, por categoría, balance por cuenta).
+
+6. **Budgets & Settings**
+
+   * CRUD de presupuestos y ajustes de usuario (tema, moneda favorita, locale).
+
+7. **ExchangeRates (Tipos de cambio)**
+
+   * Endpoint para importar/actualizar tablas de tasa, o consumir un job externo.
+   * GET para consultar tasa histórica según fecha.
+
+8. **Swagger & Documentación**
+
+   * Integra `@nestjs/swagger` para que tengas documentación de tus endpoints automáticamente.
+
+9. **Global Pipes / Filters / Interceptors**
+
+   * Usa `ValidationPipe` global con `class-validator` para validar todos los DTOs.
+   * Crea un filtro de excepción HTTP global para normalizar errores.
