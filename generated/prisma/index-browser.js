@@ -173,6 +173,7 @@ exports.Prisma.TransactionScalarFieldEnum = {
 exports.Prisma.MemberScalarFieldEnum = {
   id: 'id',
   bookId: 'bookId',
+  userId: 'userId',
   name: 'name',
   role: 'role'
 };

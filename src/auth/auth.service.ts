@@ -33,7 +33,7 @@ export class AuthService {
       const token = this.generateToken({
         id: returnUser.id,
         email: returnUser.email,
-        roles: returnUser.role,
+        role: returnUser.role,
       });
 
       return {
@@ -72,7 +72,7 @@ export class AuthService {
     const token = this.generateToken({
       id: returnUser.id,
       email: returnUser.email,
-      roles: returnUser.role,
+      role: returnUser.role,
     });
 
     return {
@@ -87,7 +87,7 @@ export class AuthService {
     const token = this.generateToken({
       id: returnUser.id,
       email: returnUser.email,
-      roles: returnUser.role,
+      role: returnUser.role,
     });
 
     return {

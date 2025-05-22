@@ -1798,11 +1798,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     books: number
     settings: number
+    Member: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     books?: boolean | UserCountOutputTypeCountBooksArgs
     settings?: boolean | UserCountOutputTypeCountSettingsArgs
+    Member?: boolean | UserCountOutputTypeCountMemberArgs
   }
 
   // Custom InputTypes
@@ -1828,6 +1830,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SettingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMemberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemberWhereInput
   }
 
 
@@ -2214,6 +2223,7 @@ export namespace Prisma {
     role?: boolean
     books?: boolean | User$booksArgs<ExtArgs>
     settings?: boolean | User$settingsArgs<ExtArgs>
+    Member?: boolean | User$MemberArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2248,6 +2258,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     books?: boolean | User$booksArgs<ExtArgs>
     settings?: boolean | User$settingsArgs<ExtArgs>
+    Member?: boolean | User$MemberArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2258,6 +2269,7 @@ export namespace Prisma {
     objects: {
       books: Prisma.$BookPayload<ExtArgs>[]
       settings: Prisma.$SettingPayload<ExtArgs>[]
+      Member: Prisma.$MemberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2662,6 +2674,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     books<T extends User$booksArgs<ExtArgs> = {}>(args?: Subset<T, User$booksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     settings<T extends User$settingsArgs<ExtArgs> = {}>(args?: Subset<T, User$settingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Member<T extends User$MemberArgs<ExtArgs> = {}>(args?: Subset<T, User$MemberArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3130,6 +3143,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SettingScalarFieldEnum | SettingScalarFieldEnum[]
+  }
+
+  /**
+   * User.Member
+   */
+  export type User$MemberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    where?: MemberWhereInput
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    cursor?: MemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
   }
 
   /**
@@ -8851,6 +8888,7 @@ export namespace Prisma {
   export type MemberMinAggregateOutputType = {
     id: string | null
     bookId: string | null
+    userId: string | null
     name: string | null
     role: $Enums.Role | null
   }
@@ -8858,6 +8896,7 @@ export namespace Prisma {
   export type MemberMaxAggregateOutputType = {
     id: string | null
     bookId: string | null
+    userId: string | null
     name: string | null
     role: $Enums.Role | null
   }
@@ -8865,6 +8904,7 @@ export namespace Prisma {
   export type MemberCountAggregateOutputType = {
     id: number
     bookId: number
+    userId: number
     name: number
     role: number
     _all: number
@@ -8874,6 +8914,7 @@ export namespace Prisma {
   export type MemberMinAggregateInputType = {
     id?: true
     bookId?: true
+    userId?: true
     name?: true
     role?: true
   }
@@ -8881,6 +8922,7 @@ export namespace Prisma {
   export type MemberMaxAggregateInputType = {
     id?: true
     bookId?: true
+    userId?: true
     name?: true
     role?: true
   }
@@ -8888,6 +8930,7 @@ export namespace Prisma {
   export type MemberCountAggregateInputType = {
     id?: true
     bookId?: true
+    userId?: true
     name?: true
     role?: true
     _all?: true
@@ -8968,6 +9011,7 @@ export namespace Prisma {
   export type MemberGroupByOutputType = {
     id: string
     bookId: string
+    userId: string
     name: string
     role: $Enums.Role
     _count: MemberCountAggregateOutputType | null
@@ -8992,53 +9036,65 @@ export namespace Prisma {
   export type MemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     bookId?: boolean
+    userId?: boolean
     name?: boolean
     role?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     bookId?: boolean
+    userId?: boolean
     name?: boolean
     role?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     bookId?: boolean
+    userId?: boolean
     name?: boolean
     role?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectScalar = {
     id?: boolean
     bookId?: boolean
+    userId?: boolean
     name?: boolean
     role?: boolean
   }
 
-  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookId" | "name" | "role", ExtArgs["result"]["member"]>
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookId" | "userId" | "name" | "role", ExtArgs["result"]["member"]>
   export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     book?: boolean | BookDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type MemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     book?: boolean | BookDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type MemberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     book?: boolean | BookDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $MemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Member"
     objects: {
       book: Prisma.$BookPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       bookId: string
+      userId: string
       name: string
       role: $Enums.Role
     }, ExtArgs["result"]["member"]>
@@ -9436,6 +9492,7 @@ export namespace Prisma {
   export interface Prisma__MemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     book<T extends BookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BookDefaultArgs<ExtArgs>>): Prisma__BookClient<$Result.GetResult<Prisma.$BookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9467,6 +9524,7 @@ export namespace Prisma {
   interface MemberFieldRefs {
     readonly id: FieldRef<"Member", 'String'>
     readonly bookId: FieldRef<"Member", 'String'>
+    readonly userId: FieldRef<"Member", 'String'>
     readonly name: FieldRef<"Member", 'String'>
     readonly role: FieldRef<"Member", 'Role'>
   }
@@ -14355,6 +14413,7 @@ export namespace Prisma {
   export const MemberScalarFieldEnum: {
     id: 'id',
     bookId: 'bookId',
+    userId: 'userId',
     name: 'name',
     role: 'role'
   };
@@ -14531,6 +14590,7 @@ export namespace Prisma {
     role?: EnumRoleNullableListFilter<"User">
     books?: BookListRelationFilter
     settings?: SettingListRelationFilter
+    Member?: MemberListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -14542,6 +14602,7 @@ export namespace Prisma {
     role?: SortOrder
     books?: BookOrderByRelationAggregateInput
     settings?: SettingOrderByRelationAggregateInput
+    Member?: MemberOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -14556,6 +14617,7 @@ export namespace Prisma {
     role?: EnumRoleNullableListFilter<"User">
     books?: BookListRelationFilter
     settings?: SettingListRelationFilter
+    Member?: MemberListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -14908,33 +14970,41 @@ export namespace Prisma {
     NOT?: MemberWhereInput | MemberWhereInput[]
     id?: UuidFilter<"Member"> | string
     bookId?: UuidFilter<"Member"> | string
+    userId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
     role?: EnumRoleFilter<"Member"> | $Enums.Role
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type MemberOrderByWithRelationInput = {
     id?: SortOrder
     bookId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
     book?: BookOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type MemberWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    bookId_userId?: MemberBookIdUserIdCompoundUniqueInput
     AND?: MemberWhereInput | MemberWhereInput[]
     OR?: MemberWhereInput[]
     NOT?: MemberWhereInput | MemberWhereInput[]
     bookId?: UuidFilter<"Member"> | string
+    userId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
     role?: EnumRoleFilter<"Member"> | $Enums.Role
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
-  }, "id">
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "bookId_userId">
 
   export type MemberOrderByWithAggregationInput = {
     id?: SortOrder
     bookId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
     _count?: MemberCountOrderByAggregateInput
@@ -14948,6 +15018,7 @@ export namespace Prisma {
     NOT?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Member"> | string
     bookId?: UuidWithAggregatesFilter<"Member"> | string
+    userId?: UuidWithAggregatesFilter<"Member"> | string
     name?: StringWithAggregatesFilter<"Member"> | string
     role?: EnumRoleWithAggregatesFilter<"Member"> | $Enums.Role
   }
@@ -15211,6 +15282,7 @@ export namespace Prisma {
     role?: UserCreateroleInput | $Enums.Role[]
     books?: BookCreateNestedManyWithoutUserInput
     settings?: SettingCreateNestedManyWithoutUserInput
+    Member?: MemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -15222,6 +15294,7 @@ export namespace Prisma {
     role?: UserCreateroleInput | $Enums.Role[]
     books?: BookUncheckedCreateNestedManyWithoutUserInput
     settings?: SettingUncheckedCreateNestedManyWithoutUserInput
+    Member?: MemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -15233,6 +15306,7 @@ export namespace Prisma {
     role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUpdateManyWithoutUserNestedInput
     settings?: SettingUpdateManyWithoutUserNestedInput
+    Member?: MemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -15244,6 +15318,7 @@ export namespace Prisma {
     role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUncheckedUpdateManyWithoutUserNestedInput
     settings?: SettingUncheckedUpdateManyWithoutUserNestedInput
+    Member?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15603,11 +15678,13 @@ export namespace Prisma {
     name: string
     role: $Enums.Role
     book: BookCreateNestedOneWithoutMembersInput
+    user: UserCreateNestedOneWithoutMemberInput
   }
 
   export type MemberUncheckedCreateInput = {
     id?: string
     bookId: string
+    userId: string
     name: string
     role: $Enums.Role
   }
@@ -15617,11 +15694,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     book?: BookUpdateOneRequiredWithoutMembersNestedInput
+    user?: UserUpdateOneRequiredWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
@@ -15629,6 +15708,7 @@ export namespace Prisma {
   export type MemberCreateManyInput = {
     id?: string
     bookId: string
+    userId: string
     name: string
     role: $Enums.Role
   }
@@ -15642,6 +15722,7 @@ export namespace Prisma {
   export type MemberUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
@@ -15950,11 +16031,21 @@ export namespace Prisma {
     none?: SettingWhereInput
   }
 
+  export type MemberListRelationFilter = {
+    every?: MemberWhereInput
+    some?: MemberWhereInput
+    none?: MemberWhereInput
+  }
+
   export type BookOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type SettingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16062,12 +16153,6 @@ export namespace Prisma {
     none?: CategoryWhereInput
   }
 
-  export type MemberListRelationFilter = {
-    every?: MemberWhereInput
-    some?: MemberWhereInput
-    none?: MemberWhereInput
-  }
-
   export type BudgetListRelationFilter = {
     every?: BudgetWhereInput
     some?: BudgetWhereInput
@@ -16084,10 +16169,6 @@ export namespace Prisma {
   }
 
   export type CategoryOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16336,9 +16417,15 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type MemberBookIdUserIdCompoundUniqueInput = {
+    bookId: string
+    userId: string
+  }
+
   export type MemberCountOrderByAggregateInput = {
     id?: SortOrder
     bookId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
   }
@@ -16346,6 +16433,7 @@ export namespace Prisma {
   export type MemberMaxOrderByAggregateInput = {
     id?: SortOrder
     bookId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
   }
@@ -16353,6 +16441,7 @@ export namespace Prisma {
   export type MemberMinOrderByAggregateInput = {
     id?: SortOrder
     bookId?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
   }
@@ -16557,6 +16646,13 @@ export namespace Prisma {
     connect?: SettingWhereUniqueInput | SettingWhereUniqueInput[]
   }
 
+  export type MemberCreateNestedManyWithoutUserInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
   export type BookUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<BookCreateWithoutUserInput, BookUncheckedCreateWithoutUserInput> | BookCreateWithoutUserInput[] | BookUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookCreateOrConnectWithoutUserInput | BookCreateOrConnectWithoutUserInput[]
@@ -16569,6 +16665,13 @@ export namespace Prisma {
     connectOrCreate?: SettingCreateOrConnectWithoutUserInput | SettingCreateOrConnectWithoutUserInput[]
     createMany?: SettingCreateManyUserInputEnvelope
     connect?: SettingWhereUniqueInput | SettingWhereUniqueInput[]
+  }
+
+  export type MemberUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16612,6 +16715,20 @@ export namespace Prisma {
     deleteMany?: SettingScalarWhereInput | SettingScalarWhereInput[]
   }
 
+  export type MemberUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutUserInput | MemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
   export type BookUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<BookCreateWithoutUserInput, BookUncheckedCreateWithoutUserInput> | BookCreateWithoutUserInput[] | BookUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookCreateOrConnectWithoutUserInput | BookCreateOrConnectWithoutUserInput[]
@@ -16638,6 +16755,20 @@ export namespace Prisma {
     update?: SettingUpdateWithWhereUniqueWithoutUserInput | SettingUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SettingUpdateManyWithWhereWithoutUserInput | SettingUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SettingScalarWhereInput | SettingScalarWhereInput[]
+  }
+
+  export type MemberUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutUserInput | MemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutBooksInput = {
@@ -17204,6 +17335,12 @@ export namespace Prisma {
     connect?: BookWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutMemberInput = {
+    create?: XOR<UserCreateWithoutMemberInput, UserUncheckedCreateWithoutMemberInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMemberInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type EnumRoleFieldUpdateOperationsInput = {
     set?: $Enums.Role
   }
@@ -17214,6 +17351,14 @@ export namespace Prisma {
     upsert?: BookUpsertWithoutMembersInput
     connect?: BookWhereUniqueInput
     update?: XOR<XOR<BookUpdateToOneWithWhereWithoutMembersInput, BookUpdateWithoutMembersInput>, BookUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMemberNestedInput = {
+    create?: XOR<UserCreateWithoutMemberInput, UserUncheckedCreateWithoutMemberInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMemberInput
+    upsert?: UserUpsertWithoutMemberInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMemberInput, UserUpdateWithoutMemberInput>, UserUncheckedUpdateWithoutMemberInput>
   }
 
   export type BookCreateNestedOneWithoutBudgetsInput = {
@@ -17584,6 +17729,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MemberCreateWithoutUserInput = {
+    id?: string
+    name: string
+    role: $Enums.Role
+    book: BookCreateNestedOneWithoutMembersInput
+  }
+
+  export type MemberUncheckedCreateWithoutUserInput = {
+    id?: string
+    bookId: string
+    name: string
+    role: $Enums.Role
+  }
+
+  export type MemberCreateOrConnectWithoutUserInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type MemberCreateManyUserInputEnvelope = {
+    data: MemberCreateManyUserInput | MemberCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BookUpsertWithWhereUniqueWithoutUserInput = {
     where: BookWhereUniqueInput
     update: XOR<BookUpdateWithoutUserInput, BookUncheckedUpdateWithoutUserInput>
@@ -17639,6 +17808,33 @@ export namespace Prisma {
     notificationEnabled?: BoolFilter<"Setting"> | boolean
   }
 
+  export type MemberUpsertWithWhereUniqueWithoutUserInput = {
+    where: MemberWhereUniqueInput
+    update: XOR<MemberUpdateWithoutUserInput, MemberUncheckedUpdateWithoutUserInput>
+    create: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type MemberUpdateWithWhereUniqueWithoutUserInput = {
+    where: MemberWhereUniqueInput
+    data: XOR<MemberUpdateWithoutUserInput, MemberUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MemberUpdateManyWithWhereWithoutUserInput = {
+    where: MemberScalarWhereInput
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MemberScalarWhereInput = {
+    AND?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    OR?: MemberScalarWhereInput[]
+    NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    id?: UuidFilter<"Member"> | string
+    bookId?: UuidFilter<"Member"> | string
+    userId?: UuidFilter<"Member"> | string
+    name?: StringFilter<"Member"> | string
+    role?: EnumRoleFilter<"Member"> | $Enums.Role
+  }
+
   export type UserCreateWithoutBooksInput = {
     id?: string
     username: string
@@ -17647,6 +17843,7 @@ export namespace Prisma {
     createdAt?: Date | string
     role?: UserCreateroleInput | $Enums.Role[]
     settings?: SettingCreateNestedManyWithoutUserInput
+    Member?: MemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBooksInput = {
@@ -17657,6 +17854,7 @@ export namespace Prisma {
     createdAt?: Date | string
     role?: UserCreateroleInput | $Enums.Role[]
     settings?: SettingUncheckedCreateNestedManyWithoutUserInput
+    Member?: MemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBooksInput = {
@@ -17722,10 +17920,12 @@ export namespace Prisma {
     id?: string
     name: string
     role: $Enums.Role
+    user: UserCreateNestedOneWithoutMemberInput
   }
 
   export type MemberUncheckedCreateWithoutBookInput = {
     id?: string
+    userId: string
     name: string
     role: $Enums.Role
   }
@@ -17787,6 +17987,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: UserUpdateroleInput | $Enums.Role[]
     settings?: SettingUpdateManyWithoutUserNestedInput
+    Member?: MemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBooksInput = {
@@ -17797,6 +17998,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: UserUpdateroleInput | $Enums.Role[]
     settings?: SettingUncheckedUpdateManyWithoutUserNestedInput
+    Member?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountUpsertWithWhereUniqueWithoutBookInput = {
@@ -17867,16 +18069,6 @@ export namespace Prisma {
   export type MemberUpdateManyWithWhereWithoutBookInput = {
     where: MemberScalarWhereInput
     data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutBookInput>
-  }
-
-  export type MemberScalarWhereInput = {
-    AND?: MemberScalarWhereInput | MemberScalarWhereInput[]
-    OR?: MemberScalarWhereInput[]
-    NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
-    id?: UuidFilter<"Member"> | string
-    bookId?: UuidFilter<"Member"> | string
-    name?: StringFilter<"Member"> | string
-    role?: EnumRoleFilter<"Member"> | $Enums.Role
   }
 
   export type BudgetUpsertWithWhereUniqueWithoutBookInput = {
@@ -18547,6 +18739,33 @@ export namespace Prisma {
     create: XOR<BookCreateWithoutMembersInput, BookUncheckedCreateWithoutMembersInput>
   }
 
+  export type UserCreateWithoutMemberInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
+    books?: BookCreateNestedManyWithoutUserInput
+    settings?: SettingCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMemberInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    role?: UserCreateroleInput | $Enums.Role[]
+    books?: BookUncheckedCreateNestedManyWithoutUserInput
+    settings?: SettingUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMemberInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMemberInput, UserUncheckedCreateWithoutMemberInput>
+  }
+
   export type BookUpsertWithoutMembersInput = {
     update: XOR<BookUpdateWithoutMembersInput, BookUncheckedUpdateWithoutMembersInput>
     create: XOR<BookCreateWithoutMembersInput, BookUncheckedCreateWithoutMembersInput>
@@ -18578,6 +18797,39 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutBookNestedInput
     categories?: CategoryUncheckedUpdateManyWithoutBookNestedInput
     budgets?: BudgetUncheckedUpdateManyWithoutBookNestedInput
+  }
+
+  export type UserUpsertWithoutMemberInput = {
+    update: XOR<UserUpdateWithoutMemberInput, UserUncheckedUpdateWithoutMemberInput>
+    create: XOR<UserCreateWithoutMemberInput, UserUncheckedCreateWithoutMemberInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMemberInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMemberInput, UserUncheckedUpdateWithoutMemberInput>
+  }
+
+  export type UserUpdateWithoutMemberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
+    books?: BookUpdateManyWithoutUserNestedInput
+    settings?: SettingUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMemberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: UserUpdateroleInput | $Enums.Role[]
+    books?: BookUncheckedUpdateManyWithoutUserNestedInput
+    settings?: SettingUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BookCreateWithoutBudgetsInput = {
@@ -18696,6 +18948,7 @@ export namespace Prisma {
     createdAt?: Date | string
     role?: UserCreateroleInput | $Enums.Role[]
     books?: BookCreateNestedManyWithoutUserInput
+    Member?: MemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSettingsInput = {
@@ -18706,6 +18959,7 @@ export namespace Prisma {
     createdAt?: Date | string
     role?: UserCreateroleInput | $Enums.Role[]
     books?: BookUncheckedCreateNestedManyWithoutUserInput
+    Member?: MemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSettingsInput = {
@@ -18755,6 +19009,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUpdateManyWithoutUserNestedInput
+    Member?: MemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSettingsInput = {
@@ -18765,6 +19020,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: UserUpdateroleInput | $Enums.Role[]
     books?: BookUncheckedUpdateManyWithoutUserNestedInput
+    Member?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CurrencyUpsertWithoutSettingsInput = {
@@ -18919,6 +19175,13 @@ export namespace Prisma {
     notificationEnabled?: boolean
   }
 
+  export type MemberCreateManyUserInput = {
+    id?: string
+    bookId: string
+    name: string
+    role: $Enums.Role
+  }
+
   export type BookUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -18972,6 +19235,27 @@ export namespace Prisma {
     notificationEnabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type MemberUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    book?: BookUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
+  export type MemberUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
   export type AccountCreateManyBookInput = {
     id?: string
     name: string
@@ -18988,6 +19272,7 @@ export namespace Prisma {
 
   export type MemberCreateManyBookInput = {
     id?: string
+    userId: string
     name: string
     role: $Enums.Role
   }
@@ -19053,16 +19338,19 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    user?: UserUpdateOneRequiredWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MemberUncheckedUpdateManyWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }

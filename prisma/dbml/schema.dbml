@@ -1,0 +1,162 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  username String [unique, not null]
+  email String [unique, not null]
+  password String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  role Role[] [not null]
+  books Book [not null]
+  settings Setting [not null]
+  Member Member [not null]
+}
+
+Table Book {
+  id String [pk]
+  user User [not null]
+  userId String [not null]
+  name String [not null]
+  description String
+  createdAt DateTime [default: `now()`, not null]
+  accounts Account [not null]
+  categories Category [not null]
+  members Member [not null]
+  budgets Budget [not null]
+}
+
+Table Currency {
+  code String [pk]
+  name String [not null]
+  symbol String [not null]
+  exchangeRate Decimal [not null]
+  accounts Account [not null]
+  settings Setting [not null]
+  exchangeRates ExchangeRate [not null]
+}
+
+Table Account {
+  id String [pk]
+  book Book [not null]
+  bookId String [not null]
+  name String [not null]
+  type String [not null]
+  currency Currency [not null]
+  currencyCode String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  transactions Transaction [not null]
+}
+
+Table Category {
+  id String [pk]
+  book Book [not null]
+  bookId String [not null]
+  name String [not null]
+  type String [not null]
+  transactions Transaction [not null]
+  budgets Budget [not null]
+}
+
+Table Transaction {
+  id String [pk]
+  account Account [not null]
+  accountId String [not null]
+  category Category [not null]
+  categoryId String [not null]
+  amount Decimal [not null]
+  transactionAt DateTime [not null]
+  description String
+  createdAt DateTime [default: `now()`, not null]
+  attachments Attachment [not null]
+}
+
+Table Member {
+  id String [pk]
+  book Book [not null]
+  bookId String [not null]
+  user User [not null]
+  userId String [not null]
+  name String [not null]
+  role Role [not null]
+
+  indexes {
+    (bookId, userId) [unique]
+  }
+}
+
+Table Budget {
+  id String [pk]
+  book Book [not null]
+  bookId String [not null]
+  category Category [not null]
+  categoryId String [not null]
+  amount Decimal [not null]
+  period String [not null]
+  startDate DateTime [not null]
+  endDate DateTime
+}
+
+Table Setting {
+  id String [pk]
+  user User [not null]
+  userId String [not null]
+  theme String [not null, default: 'light']
+  currency Currency
+  currencyCode String
+  locale String
+  notificationEnabled Boolean [not null, default: true]
+}
+
+Table Attachment {
+  id String [pk]
+  transaction Transaction [not null]
+  transactionId String [not null]
+  filePath String [not null]
+  createdAt DateTime [default: `now()`, not null]
+}
+
+Table ExchangeRate {
+  id String [pk]
+  currency Currency [not null]
+  currencyCode String [not null]
+  rateToBase Decimal [not null]
+  validFrom DateTime [not null]
+  validTo DateTime
+  source String [not null]
+  createdAt DateTime [default: `now()`, not null]
+}
+
+Enum Role {
+  ADMIN
+  USER
+}
+
+Ref: Book.userId > User.id
+
+Ref: Account.bookId > Book.id
+
+Ref: Account.currencyCode > Currency.code
+
+Ref: Category.bookId > Book.id
+
+Ref: Transaction.accountId > Account.id
+
+Ref: Transaction.categoryId > Category.id
+
+Ref: Member.bookId > Book.id
+
+Ref: Member.userId > User.id
+
+Ref: Budget.bookId > Book.id
+
+Ref: Budget.categoryId > Category.id
+
+Ref: Setting.userId > User.id
+
+Ref: Setting.currencyCode > Currency.code
+
+Ref: Attachment.transactionId > Transaction.id
+
+Ref: ExchangeRate.currencyCode > Currency.code
