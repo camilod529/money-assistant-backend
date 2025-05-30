@@ -2,11 +2,13 @@ export const PERMISSIONS = {
   BOOK: {
     CREATE: 'book:create',
     DELETE: 'book:delete',
-    UPDATE: 'book:update',
     INVITE_MEMBER: 'book:invite',
-    REMOVE_MEMBER: 'book:remove_member',
-    MANAGE_CATEGORIES: 'book:manage_categories',
+    MANAGE_ACCOUNTS: 'book:manage_accounts',
     MANAGE_BUDGETS: 'book:manage_budgets',
+    MANAGE_CATEGORIES: 'book:manage_categories',
+    REMOVE_MEMBER: 'book:remove_member',
+    UPDATE: 'book:update',
+    VIEW_ACCOUNTS: 'book:view_accounts',
   },
   ACCOUNT: {
     CREATE: 'account:create',

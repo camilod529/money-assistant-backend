@@ -46,6 +46,7 @@ Table Account {
   currency Currency [not null]
   currencyCode String [not null]
   createdAt DateTime [default: `now()`, not null]
+  balance Decimal [not null, default: 0]
   transactions Transaction [not null]
 }
 

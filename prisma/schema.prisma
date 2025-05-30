@@ -63,6 +63,7 @@ model Account {
   currency     Currency      @relation(fields: [currencyCode], references: [code])
   currencyCode String
   createdAt    DateTime      @default(now())
+  balance      Decimal       @default(0) @db.Decimal(18, 2)
   transactions Transaction[]
 }
 

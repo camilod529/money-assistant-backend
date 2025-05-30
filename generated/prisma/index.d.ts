@@ -5516,8 +5516,18 @@ export namespace Prisma {
 
   export type AggregateAccount = {
     _count: AccountCountAggregateOutputType | null
+    _avg: AccountAvgAggregateOutputType | null
+    _sum: AccountSumAggregateOutputType | null
     _min: AccountMinAggregateOutputType | null
     _max: AccountMaxAggregateOutputType | null
+  }
+
+  export type AccountAvgAggregateOutputType = {
+    balance: Decimal | null
+  }
+
+  export type AccountSumAggregateOutputType = {
+    balance: Decimal | null
   }
 
   export type AccountMinAggregateOutputType = {
@@ -5527,6 +5537,7 @@ export namespace Prisma {
     type: string | null
     currencyCode: string | null
     createdAt: Date | null
+    balance: Decimal | null
   }
 
   export type AccountMaxAggregateOutputType = {
@@ -5536,6 +5547,7 @@ export namespace Prisma {
     type: string | null
     currencyCode: string | null
     createdAt: Date | null
+    balance: Decimal | null
   }
 
   export type AccountCountAggregateOutputType = {
@@ -5545,9 +5557,18 @@ export namespace Prisma {
     type: number
     currencyCode: number
     createdAt: number
+    balance: number
     _all: number
   }
 
+
+  export type AccountAvgAggregateInputType = {
+    balance?: true
+  }
+
+  export type AccountSumAggregateInputType = {
+    balance?: true
+  }
 
   export type AccountMinAggregateInputType = {
     id?: true
@@ -5556,6 +5577,7 @@ export namespace Prisma {
     type?: true
     currencyCode?: true
     createdAt?: true
+    balance?: true
   }
 
   export type AccountMaxAggregateInputType = {
@@ -5565,6 +5587,7 @@ export namespace Prisma {
     type?: true
     currencyCode?: true
     createdAt?: true
+    balance?: true
   }
 
   export type AccountCountAggregateInputType = {
@@ -5574,6 +5597,7 @@ export namespace Prisma {
     type?: true
     currencyCode?: true
     createdAt?: true
+    balance?: true
     _all?: true
   }
 
@@ -5615,6 +5639,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: AccountAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccountSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: AccountMinAggregateInputType
@@ -5645,6 +5681,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: AccountCountAggregateInputType | true
+    _avg?: AccountAvgAggregateInputType
+    _sum?: AccountSumAggregateInputType
     _min?: AccountMinAggregateInputType
     _max?: AccountMaxAggregateInputType
   }
@@ -5656,7 +5694,10 @@ export namespace Prisma {
     type: string
     currencyCode: string
     createdAt: Date
+    balance: Decimal
     _count: AccountCountAggregateOutputType | null
+    _avg: AccountAvgAggregateOutputType | null
+    _sum: AccountSumAggregateOutputType | null
     _min: AccountMinAggregateOutputType | null
     _max: AccountMaxAggregateOutputType | null
   }
@@ -5682,6 +5723,7 @@ export namespace Prisma {
     type?: boolean
     currencyCode?: boolean
     createdAt?: boolean
+    balance?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
     transactions?: boolean | Account$transactionsArgs<ExtArgs>
@@ -5695,6 +5737,7 @@ export namespace Prisma {
     type?: boolean
     currencyCode?: boolean
     createdAt?: boolean
+    balance?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
@@ -5706,6 +5749,7 @@ export namespace Prisma {
     type?: boolean
     currencyCode?: boolean
     createdAt?: boolean
+    balance?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
@@ -5717,9 +5761,10 @@ export namespace Prisma {
     type?: boolean
     currencyCode?: boolean
     createdAt?: boolean
+    balance?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookId" | "name" | "type" | "currencyCode" | "createdAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookId" | "name" | "type" | "currencyCode" | "createdAt" | "balance", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     book?: boolean | BookDefaultArgs<ExtArgs>
     currency?: boolean | CurrencyDefaultArgs<ExtArgs>
@@ -5749,6 +5794,7 @@ export namespace Prisma {
       type: string
       currencyCode: string
       createdAt: Date
+      balance: Prisma.Decimal
     }, ExtArgs["result"]["account"]>
     composites: {}
   }
@@ -6181,6 +6227,7 @@ export namespace Prisma {
     readonly type: FieldRef<"Account", 'String'>
     readonly currencyCode: FieldRef<"Account", 'String'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
+    readonly balance: FieldRef<"Account", 'Decimal'>
   }
     
 
@@ -14436,7 +14483,8 @@ export namespace Prisma {
     name: 'name',
     type: 'type',
     currencyCode: 'currencyCode',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    balance: 'balance'
   };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -14838,6 +14886,7 @@ export namespace Prisma {
     type?: StringFilter<"Account"> | string
     currencyCode?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
+    balance?: DecimalFilter<"Account"> | Decimal | DecimalJsLike | number | string
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
     currency?: XOR<CurrencyScalarRelationFilter, CurrencyWhereInput>
     transactions?: TransactionListRelationFilter
@@ -14850,6 +14899,7 @@ export namespace Prisma {
     type?: SortOrder
     currencyCode?: SortOrder
     createdAt?: SortOrder
+    balance?: SortOrder
     book?: BookOrderByWithRelationInput
     currency?: CurrencyOrderByWithRelationInput
     transactions?: TransactionOrderByRelationAggregateInput
@@ -14865,6 +14915,7 @@ export namespace Prisma {
     type?: StringFilter<"Account"> | string
     currencyCode?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
+    balance?: DecimalFilter<"Account"> | Decimal | DecimalJsLike | number | string
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
     currency?: XOR<CurrencyScalarRelationFilter, CurrencyWhereInput>
     transactions?: TransactionListRelationFilter
@@ -14877,9 +14928,12 @@ export namespace Prisma {
     type?: SortOrder
     currencyCode?: SortOrder
     createdAt?: SortOrder
+    balance?: SortOrder
     _count?: AccountCountOrderByAggregateInput
+    _avg?: AccountAvgOrderByAggregateInput
     _max?: AccountMaxOrderByAggregateInput
     _min?: AccountMinOrderByAggregateInput
+    _sum?: AccountSumOrderByAggregateInput
   }
 
   export type AccountScalarWhereWithAggregatesInput = {
@@ -14892,6 +14946,7 @@ export namespace Prisma {
     type?: StringWithAggregatesFilter<"Account"> | string
     currencyCode?: StringWithAggregatesFilter<"Account"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    balance?: DecimalWithAggregatesFilter<"Account"> | Decimal | DecimalJsLike | number | string
   }
 
   export type CategoryWhereInput = {
@@ -15564,6 +15619,7 @@ export namespace Prisma {
     name: string
     type: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     book: BookCreateNestedOneWithoutAccountsInput
     currency: CurrencyCreateNestedOneWithoutAccountsInput
     transactions?: TransactionCreateNestedManyWithoutAccountInput
@@ -15576,6 +15632,7 @@ export namespace Prisma {
     type: string
     currencyCode: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     transactions?: TransactionUncheckedCreateNestedManyWithoutAccountInput
   }
 
@@ -15584,6 +15641,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     book?: BookUpdateOneRequiredWithoutAccountsNestedInput
     currency?: CurrencyUpdateOneRequiredWithoutAccountsNestedInput
     transactions?: TransactionUpdateManyWithoutAccountNestedInput
@@ -15596,6 +15654,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     currencyCode?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     transactions?: TransactionUncheckedUpdateManyWithoutAccountNestedInput
   }
 
@@ -15606,6 +15665,7 @@ export namespace Prisma {
     type: string
     currencyCode: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
   }
 
   export type AccountUpdateManyMutationInput = {
@@ -15613,6 +15673,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -15622,6 +15683,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     currencyCode?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type CategoryCreateInput = {
@@ -16418,6 +16480,11 @@ export namespace Prisma {
     type?: SortOrder
     currencyCode?: SortOrder
     createdAt?: SortOrder
+    balance?: SortOrder
+  }
+
+  export type AccountAvgOrderByAggregateInput = {
+    balance?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
@@ -16427,6 +16494,7 @@ export namespace Prisma {
     type?: SortOrder
     currencyCode?: SortOrder
     createdAt?: SortOrder
+    balance?: SortOrder
   }
 
   export type AccountMinOrderByAggregateInput = {
@@ -16436,6 +16504,11 @@ export namespace Prisma {
     type?: SortOrder
     currencyCode?: SortOrder
     createdAt?: SortOrder
+    balance?: SortOrder
+  }
+
+  export type AccountSumOrderByAggregateInput = {
+    balance?: SortOrder
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -17998,6 +18071,7 @@ export namespace Prisma {
     name: string
     type: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     currency: CurrencyCreateNestedOneWithoutAccountsInput
     transactions?: TransactionCreateNestedManyWithoutAccountInput
   }
@@ -18008,6 +18082,7 @@ export namespace Prisma {
     type: string
     currencyCode: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     transactions?: TransactionUncheckedCreateNestedManyWithoutAccountInput
   }
 
@@ -18166,6 +18241,7 @@ export namespace Prisma {
     type?: StringFilter<"Account"> | string
     currencyCode?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
+    balance?: DecimalFilter<"Account"> | Decimal | DecimalJsLike | number | string
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutBookInput = {
@@ -18244,6 +18320,7 @@ export namespace Prisma {
     name: string
     type: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     book: BookCreateNestedOneWithoutAccountsInput
     transactions?: TransactionCreateNestedManyWithoutAccountInput
   }
@@ -18254,6 +18331,7 @@ export namespace Prisma {
     name: string
     type: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     transactions?: TransactionUncheckedCreateNestedManyWithoutAccountInput
   }
 
@@ -18708,6 +18786,7 @@ export namespace Prisma {
     name: string
     type: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
     book: BookCreateNestedOneWithoutAccountsInput
     currency: CurrencyCreateNestedOneWithoutAccountsInput
   }
@@ -18719,6 +18798,7 @@ export namespace Prisma {
     type: string
     currencyCode: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
   }
 
   export type AccountCreateOrConnectWithoutTransactionsInput = {
@@ -18785,6 +18865,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     book?: BookUpdateOneRequiredWithoutAccountsNestedInput
     currency?: CurrencyUpdateOneRequiredWithoutAccountsNestedInput
   }
@@ -18796,6 +18877,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     currencyCode?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type CategoryUpsertWithoutTransactionsInput = {
@@ -19417,6 +19499,7 @@ export namespace Prisma {
     type: string
     currencyCode: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
   }
 
   export type CategoryCreateManyBookInput = {
@@ -19450,6 +19533,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     currency?: CurrencyUpdateOneRequiredWithoutAccountsNestedInput
     transactions?: TransactionUpdateManyWithoutAccountNestedInput
   }
@@ -19460,6 +19544,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     currencyCode?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     transactions?: TransactionUncheckedUpdateManyWithoutAccountNestedInput
   }
 
@@ -19469,6 +19554,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     currencyCode?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type CategoryUpdateWithoutBookInput = {
@@ -19559,6 +19645,7 @@ export namespace Prisma {
     name: string
     type: string
     createdAt?: Date | string
+    balance?: Decimal | DecimalJsLike | number | string
   }
 
   export type SettingCreateManyCurrencyInput = {
@@ -19583,6 +19670,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     book?: BookUpdateOneRequiredWithoutAccountsNestedInput
     transactions?: TransactionUpdateManyWithoutAccountNestedInput
   }
@@ -19593,6 +19681,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     transactions?: TransactionUncheckedUpdateManyWithoutAccountNestedInput
   }
 
@@ -19602,6 +19691,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type SettingUpdateWithoutCurrencyInput = {

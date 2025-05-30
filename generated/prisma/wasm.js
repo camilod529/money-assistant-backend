@@ -150,7 +150,8 @@ exports.Prisma.AccountScalarFieldEnum = {
   name: 'name',
   type: 'type',
   currencyCode: 'currencyCode',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  balance: 'balance'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
