@@ -175,7 +175,11 @@ exports.Prisma.MemberScalarFieldEnum = {
   bookId: 'bookId',
   userId: 'userId',
   name: 'name',
-  role: 'role'
+  role: 'role',
+  canManageCategories: 'canManageCategories',
+  canManageBudgets: 'canManageBudgets',
+  canInviteMembers: 'canInviteMembers',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.BudgetScalarFieldEnum = {
@@ -229,8 +233,11 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
+  SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN',
-  USER: 'USER'
+  EDITOR: 'EDITOR',
+  CONTRIBUTOR: 'CONTRIBUTOR',
+  VIEWER: 'VIEWER'
 };
 
 exports.Prisma.ModelName = {

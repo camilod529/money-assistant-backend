@@ -80,6 +80,10 @@ Table Member {
   userId String [not null]
   name String [not null]
   role Role [not null]
+  canManageCategories Boolean [not null, default: false]
+  canManageBudgets Boolean [not null, default: false]
+  canInviteMembers Boolean [not null, default: false]
+  createdAt DateTime [default: `now()`, not null]
 
   indexes {
     (bookId, userId) [unique]
@@ -129,8 +133,11 @@ Table ExchangeRate {
 }
 
 Enum Role {
+  SUPER_ADMIN
   ADMIN
-  USER
+  EDITOR
+  CONTRIBUTOR
+  VIEWER
 }
 
 Ref: Book.userId > User.id

@@ -5,6 +5,7 @@ import { env } from 'src/config/env';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AuthorizationModule } from './authorization.module';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
@@ -12,6 +13,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   providers: [AuthService, JwtStrategy],
   imports: [
     PrismaModule,
+    AuthorizationModule,
     PassportModule,
     JwtModule.register({
       secret: env.JWT_SECRET,

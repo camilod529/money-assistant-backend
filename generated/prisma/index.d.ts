@@ -74,8 +74,11 @@ export type ExchangeRate = $Result.DefaultSelection<Prisma.$ExchangeRatePayload>
  */
 export namespace $Enums {
   export const Role: {
+  SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN',
-  USER: 'USER'
+  EDITOR: 'EDITOR',
+  CONTRIBUTOR: 'CONTRIBUTOR',
+  VIEWER: 'VIEWER'
 };
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -8891,6 +8894,10 @@ export namespace Prisma {
     userId: string | null
     name: string | null
     role: $Enums.Role | null
+    canManageCategories: boolean | null
+    canManageBudgets: boolean | null
+    canInviteMembers: boolean | null
+    createdAt: Date | null
   }
 
   export type MemberMaxAggregateOutputType = {
@@ -8899,6 +8906,10 @@ export namespace Prisma {
     userId: string | null
     name: string | null
     role: $Enums.Role | null
+    canManageCategories: boolean | null
+    canManageBudgets: boolean | null
+    canInviteMembers: boolean | null
+    createdAt: Date | null
   }
 
   export type MemberCountAggregateOutputType = {
@@ -8907,6 +8918,10 @@ export namespace Prisma {
     userId: number
     name: number
     role: number
+    canManageCategories: number
+    canManageBudgets: number
+    canInviteMembers: number
+    createdAt: number
     _all: number
   }
 
@@ -8917,6 +8932,10 @@ export namespace Prisma {
     userId?: true
     name?: true
     role?: true
+    canManageCategories?: true
+    canManageBudgets?: true
+    canInviteMembers?: true
+    createdAt?: true
   }
 
   export type MemberMaxAggregateInputType = {
@@ -8925,6 +8944,10 @@ export namespace Prisma {
     userId?: true
     name?: true
     role?: true
+    canManageCategories?: true
+    canManageBudgets?: true
+    canInviteMembers?: true
+    createdAt?: true
   }
 
   export type MemberCountAggregateInputType = {
@@ -8933,6 +8956,10 @@ export namespace Prisma {
     userId?: true
     name?: true
     role?: true
+    canManageCategories?: true
+    canManageBudgets?: true
+    canInviteMembers?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -9014,6 +9041,10 @@ export namespace Prisma {
     userId: string
     name: string
     role: $Enums.Role
+    canManageCategories: boolean
+    canManageBudgets: boolean
+    canInviteMembers: boolean
+    createdAt: Date
     _count: MemberCountAggregateOutputType | null
     _min: MemberMinAggregateOutputType | null
     _max: MemberMaxAggregateOutputType | null
@@ -9039,6 +9070,10 @@ export namespace Prisma {
     userId?: boolean
     name?: boolean
     role?: boolean
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
@@ -9049,6 +9084,10 @@ export namespace Prisma {
     userId?: boolean
     name?: boolean
     role?: boolean
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
@@ -9059,6 +9098,10 @@ export namespace Prisma {
     userId?: boolean
     name?: boolean
     role?: boolean
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: boolean
     book?: boolean | BookDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
@@ -9069,9 +9112,13 @@ export namespace Prisma {
     userId?: boolean
     name?: boolean
     role?: boolean
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: boolean
   }
 
-  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookId" | "userId" | "name" | "role", ExtArgs["result"]["member"]>
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookId" | "userId" | "name" | "role" | "canManageCategories" | "canManageBudgets" | "canInviteMembers" | "createdAt", ExtArgs["result"]["member"]>
   export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     book?: boolean | BookDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -9097,6 +9144,10 @@ export namespace Prisma {
       userId: string
       name: string
       role: $Enums.Role
+      canManageCategories: boolean
+      canManageBudgets: boolean
+      canInviteMembers: boolean
+      createdAt: Date
     }, ExtArgs["result"]["member"]>
     composites: {}
   }
@@ -9527,6 +9578,10 @@ export namespace Prisma {
     readonly userId: FieldRef<"Member", 'String'>
     readonly name: FieldRef<"Member", 'String'>
     readonly role: FieldRef<"Member", 'Role'>
+    readonly canManageCategories: FieldRef<"Member", 'Boolean'>
+    readonly canManageBudgets: FieldRef<"Member", 'Boolean'>
+    readonly canInviteMembers: FieldRef<"Member", 'Boolean'>
+    readonly createdAt: FieldRef<"Member", 'DateTime'>
   }
     
 
@@ -14415,7 +14470,11 @@ export namespace Prisma {
     bookId: 'bookId',
     userId: 'userId',
     name: 'name',
-    role: 'role'
+    role: 'role',
+    canManageCategories: 'canManageCategories',
+    canManageBudgets: 'canManageBudgets',
+    canInviteMembers: 'canInviteMembers',
+    createdAt: 'createdAt'
   };
 
   export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
@@ -14973,6 +15032,10 @@ export namespace Prisma {
     userId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
     role?: EnumRoleFilter<"Member"> | $Enums.Role
+    canManageCategories?: BoolFilter<"Member"> | boolean
+    canManageBudgets?: BoolFilter<"Member"> | boolean
+    canInviteMembers?: BoolFilter<"Member"> | boolean
+    createdAt?: DateTimeFilter<"Member"> | Date | string
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -14983,6 +15046,10 @@ export namespace Prisma {
     userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    canManageCategories?: SortOrder
+    canManageBudgets?: SortOrder
+    canInviteMembers?: SortOrder
+    createdAt?: SortOrder
     book?: BookOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -14997,6 +15064,10 @@ export namespace Prisma {
     userId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
     role?: EnumRoleFilter<"Member"> | $Enums.Role
+    canManageCategories?: BoolFilter<"Member"> | boolean
+    canManageBudgets?: BoolFilter<"Member"> | boolean
+    canInviteMembers?: BoolFilter<"Member"> | boolean
+    createdAt?: DateTimeFilter<"Member"> | Date | string
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "bookId_userId">
@@ -15007,6 +15078,10 @@ export namespace Prisma {
     userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    canManageCategories?: SortOrder
+    canManageBudgets?: SortOrder
+    canInviteMembers?: SortOrder
+    createdAt?: SortOrder
     _count?: MemberCountOrderByAggregateInput
     _max?: MemberMaxOrderByAggregateInput
     _min?: MemberMinOrderByAggregateInput
@@ -15021,6 +15096,10 @@ export namespace Prisma {
     userId?: UuidWithAggregatesFilter<"Member"> | string
     name?: StringWithAggregatesFilter<"Member"> | string
     role?: EnumRoleWithAggregatesFilter<"Member"> | $Enums.Role
+    canManageCategories?: BoolWithAggregatesFilter<"Member"> | boolean
+    canManageBudgets?: BoolWithAggregatesFilter<"Member"> | boolean
+    canInviteMembers?: BoolWithAggregatesFilter<"Member"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
   }
 
   export type BudgetWhereInput = {
@@ -15677,6 +15756,10 @@ export namespace Prisma {
     id?: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
     book: BookCreateNestedOneWithoutMembersInput
     user: UserCreateNestedOneWithoutMemberInput
   }
@@ -15687,12 +15770,20 @@ export namespace Prisma {
     userId: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
   }
 
   export type MemberUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     book?: BookUpdateOneRequiredWithoutMembersNestedInput
     user?: UserUpdateOneRequiredWithoutMemberNestedInput
   }
@@ -15703,6 +15794,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberCreateManyInput = {
@@ -15711,12 +15806,20 @@ export namespace Prisma {
     userId: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
   }
 
   export type MemberUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberUncheckedUpdateManyInput = {
@@ -15725,6 +15828,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetCreateInput = {
@@ -16417,6 +16524,11 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type MemberBookIdUserIdCompoundUniqueInput = {
     bookId: string
     userId: string
@@ -16428,6 +16540,10 @@ export namespace Prisma {
     userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    canManageCategories?: SortOrder
+    canManageBudgets?: SortOrder
+    canInviteMembers?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type MemberMaxOrderByAggregateInput = {
@@ -16436,6 +16552,10 @@ export namespace Prisma {
     userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    canManageCategories?: SortOrder
+    canManageBudgets?: SortOrder
+    canInviteMembers?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type MemberMinOrderByAggregateInput = {
@@ -16444,6 +16564,10 @@ export namespace Prisma {
     userId?: SortOrder
     name?: SortOrder
     role?: SortOrder
+    canManageCategories?: SortOrder
+    canManageBudgets?: SortOrder
+    canInviteMembers?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -16454,6 +16578,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -16519,11 +16651,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type CurrencyNullableScalarRelationFilter = {
     is?: CurrencyWhereInput | null
     isNot?: CurrencyWhereInput | null
@@ -16554,14 +16681,6 @@ export namespace Prisma {
     currencyCode?: SortOrder
     locale?: SortOrder
     notificationEnabled?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TransactionScalarRelationFilter = {
@@ -17345,6 +17464,10 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type BookUpdateOneRequiredWithoutMembersNestedInput = {
     create?: XOR<BookCreateWithoutMembersInput, BookUncheckedCreateWithoutMembersInput>
     connectOrCreate?: BookCreateOrConnectWithoutMembersInput
@@ -17403,10 +17526,6 @@ export namespace Prisma {
     create?: XOR<CurrencyCreateWithoutSettingsInput, CurrencyUncheckedCreateWithoutSettingsInput>
     connectOrCreate?: CurrencyCreateOrConnectWithoutSettingsInput
     connect?: CurrencyWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutSettingsNestedInput = {
@@ -17623,6 +17742,11 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -17631,6 +17755,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -17656,19 +17788,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type BookCreateWithoutUserInput = {
@@ -17733,6 +17852,10 @@ export namespace Prisma {
     id?: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
     book: BookCreateNestedOneWithoutMembersInput
   }
 
@@ -17741,6 +17864,10 @@ export namespace Prisma {
     bookId: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
   }
 
   export type MemberCreateOrConnectWithoutUserInput = {
@@ -17833,6 +17960,10 @@ export namespace Prisma {
     userId?: UuidFilter<"Member"> | string
     name?: StringFilter<"Member"> | string
     role?: EnumRoleFilter<"Member"> | $Enums.Role
+    canManageCategories?: BoolFilter<"Member"> | boolean
+    canManageBudgets?: BoolFilter<"Member"> | boolean
+    canInviteMembers?: BoolFilter<"Member"> | boolean
+    createdAt?: DateTimeFilter<"Member"> | Date | string
   }
 
   export type UserCreateWithoutBooksInput = {
@@ -17920,6 +18051,10 @@ export namespace Prisma {
     id?: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
     user: UserCreateNestedOneWithoutMemberInput
   }
 
@@ -17928,6 +18063,10 @@ export namespace Prisma {
     userId: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
   }
 
   export type MemberCreateOrConnectWithoutBookInput = {
@@ -19180,6 +19319,10 @@ export namespace Prisma {
     bookId: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
   }
 
   export type BookUpdateWithoutUserInput = {
@@ -19239,6 +19382,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     book?: BookUpdateOneRequiredWithoutMembersNestedInput
   }
 
@@ -19247,6 +19394,10 @@ export namespace Prisma {
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberUncheckedUpdateManyWithoutUserInput = {
@@ -19254,6 +19405,10 @@ export namespace Prisma {
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateManyBookInput = {
@@ -19275,6 +19430,10 @@ export namespace Prisma {
     userId: string
     name: string
     role: $Enums.Role
+    canManageCategories?: boolean
+    canManageBudgets?: boolean
+    canInviteMembers?: boolean
+    createdAt?: Date | string
   }
 
   export type BudgetCreateManyBookInput = {
@@ -19338,6 +19497,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMemberNestedInput
   }
 
@@ -19346,6 +19509,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberUncheckedUpdateManyWithoutBookInput = {
@@ -19353,6 +19520,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    canManageCategories?: BoolFieldUpdateOperationsInput | boolean
+    canManageBudgets?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetUpdateWithoutBookInput = {
