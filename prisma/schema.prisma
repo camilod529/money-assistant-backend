@@ -121,7 +121,7 @@ model Budget {
 model Setting {
   id                  String    @id @default(uuid()) @db.Uuid
   user                User      @relation(fields: [userId], references: [id])
-  userId              String    @db.Uuid
+  userId              String    @unique @db.Uuid
   theme               String    @default("light")
   currency            Currency? @relation(fields: [currencyCode], references: [code])
   currencyCode        String?

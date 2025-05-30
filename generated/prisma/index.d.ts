@@ -15254,17 +15254,17 @@ export namespace Prisma {
 
   export type SettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     AND?: SettingWhereInput | SettingWhereInput[]
     OR?: SettingWhereInput[]
     NOT?: SettingWhereInput | SettingWhereInput[]
-    userId?: UuidFilter<"Setting"> | string
     theme?: StringFilter<"Setting"> | string
     currencyCode?: StringNullableFilter<"Setting"> | string | null
     locale?: StringNullableFilter<"Setting"> | string | null
     notificationEnabled?: BoolFilter<"Setting"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     currency?: XOR<CurrencyNullableScalarRelationFilter, CurrencyWhereInput> | null
-  }, "id">
+  }, "id" | "userId">
 
   export type SettingOrderByWithAggregationInput = {
     id?: SortOrder

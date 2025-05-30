@@ -106,7 +106,7 @@ Table Budget {
 Table Setting {
   id String [pk]
   user User [not null]
-  userId String [not null]
+  userId String [unique, not null]
   theme String [not null, default: 'light']
   currency Currency
   currencyCode String
