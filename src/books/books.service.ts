@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { Role } from '../../generated/prisma';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
+import { baseCategories } from '../config/baseCategories.const';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -36,6 +37,27 @@ export class BooksService {
         name: user.username,
       },
     });
+
+    try {
+      await this.prisma.category.createMany({
+        data: baseCategories.map((category) => ({
+          name: category.name,
+          type: category.type,
+          bookId: book.id,
+        })),
+        skipDuplicates: true,
+      });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+      this.logger.error(errorMessage, error);
+
+      if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
+        throw new ForbiddenException('Book name already exists');
+      }
+
+      throw new InternalServerErrorException(errorMessage);
+    }
 
     const returnBook = new BookEntity({ ...book });
 
