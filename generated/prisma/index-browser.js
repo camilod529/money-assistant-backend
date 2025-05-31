@@ -241,6 +241,13 @@ exports.Role = exports.$Enums.Role = {
   VIEWER: 'VIEWER'
 };
 
+exports.TransactionType = exports.$Enums.TransactionType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  ADJUSTMENT: 'ADJUSTMENT',
+  TRANSFER: 'TRANSFER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Book: 'Book',

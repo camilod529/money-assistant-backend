@@ -55,7 +55,7 @@ Table Category {
   book Book [not null]
   bookId String [not null]
   name String [not null]
-  type String [not null]
+  type TransactionType [not null]
   transactions Transaction [not null]
   budgets Budget [not null]
 }
@@ -139,6 +139,13 @@ Enum Role {
   EDITOR
   CONTRIBUTOR
   VIEWER
+}
+
+Enum TransactionType {
+  INCOME
+  EXPENSE
+  ADJUSTMENT
+  TRANSFER
 }
 
 Ref: Book.userId > User.id

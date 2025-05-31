@@ -83,11 +83,25 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const TransactionType: {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  ADJUSTMENT: 'ADJUSTMENT',
+  TRANSFER: 'TRANSFER'
+};
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type TransactionType = $Enums.TransactionType
+
+export const TransactionType: typeof $Enums.TransactionType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -6680,14 +6694,14 @@ export namespace Prisma {
     id: string | null
     bookId: string | null
     name: string | null
-    type: string | null
+    type: $Enums.TransactionType | null
   }
 
   export type CategoryMaxAggregateOutputType = {
     id: string | null
     bookId: string | null
     name: string | null
-    type: string | null
+    type: $Enums.TransactionType | null
   }
 
   export type CategoryCountAggregateOutputType = {
@@ -6797,7 +6811,7 @@ export namespace Prisma {
     id: string
     bookId: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     _count: CategoryCountAggregateOutputType | null
     _min: CategoryMinAggregateOutputType | null
     _max: CategoryMaxAggregateOutputType | null
@@ -6876,7 +6890,7 @@ export namespace Prisma {
       id: string
       bookId: string
       name: string
-      type: string
+      type: $Enums.TransactionType
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -7306,7 +7320,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Category", 'String'>
     readonly bookId: FieldRef<"Category", 'String'>
     readonly name: FieldRef<"Category", 'String'>
-    readonly type: FieldRef<"Category", 'String'>
+    readonly type: FieldRef<"Category", 'TransactionType'>
   }
     
 
@@ -14662,6 +14676,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TransactionType'
+   */
+  export type EnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionType[]'
+   */
+  export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -14956,7 +14984,7 @@ export namespace Prisma {
     id?: UuidFilter<"Category"> | string
     bookId?: UuidFilter<"Category"> | string
     name?: StringFilter<"Category"> | string
-    type?: StringFilter<"Category"> | string
+    type?: EnumTransactionTypeFilter<"Category"> | $Enums.TransactionType
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
     transactions?: TransactionListRelationFilter
     budgets?: BudgetListRelationFilter
@@ -14979,7 +15007,7 @@ export namespace Prisma {
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     bookId?: UuidFilter<"Category"> | string
     name?: StringFilter<"Category"> | string
-    type?: StringFilter<"Category"> | string
+    type?: EnumTransactionTypeFilter<"Category"> | $Enums.TransactionType
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
     transactions?: TransactionListRelationFilter
     budgets?: BudgetListRelationFilter
@@ -15002,7 +15030,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Category"> | string
     bookId?: UuidWithAggregatesFilter<"Category"> | string
     name?: StringWithAggregatesFilter<"Category"> | string
-    type?: StringWithAggregatesFilter<"Category"> | string
+    type?: EnumTransactionTypeWithAggregatesFilter<"Category"> | $Enums.TransactionType
   }
 
   export type TransactionWhereInput = {
@@ -15689,7 +15717,7 @@ export namespace Prisma {
   export type CategoryCreateInput = {
     id?: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     book: BookCreateNestedOneWithoutCategoriesInput
     transactions?: TransactionCreateNestedManyWithoutCategoryInput
     budgets?: BudgetCreateNestedManyWithoutCategoryInput
@@ -15699,7 +15727,7 @@ export namespace Prisma {
     id?: string
     bookId: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     transactions?: TransactionUncheckedCreateNestedManyWithoutCategoryInput
     budgets?: BudgetUncheckedCreateNestedManyWithoutCategoryInput
   }
@@ -15707,7 +15735,7 @@ export namespace Prisma {
   export type CategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     book?: BookUpdateOneRequiredWithoutCategoriesNestedInput
     transactions?: TransactionUpdateManyWithoutCategoryNestedInput
     budgets?: BudgetUpdateManyWithoutCategoryNestedInput
@@ -15717,7 +15745,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     transactions?: TransactionUncheckedUpdateManyWithoutCategoryNestedInput
     budgets?: BudgetUncheckedUpdateManyWithoutCategoryNestedInput
   }
@@ -15726,20 +15754,20 @@ export namespace Prisma {
     id?: string
     bookId: string
     name: string
-    type: string
+    type: $Enums.TransactionType
   }
 
   export type CategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
   }
 
   export type CategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
   }
 
   export type TransactionCreateInput = {
@@ -16511,6 +16539,13 @@ export namespace Prisma {
     balance?: SortOrder
   }
 
+  export type EnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     bookId?: SortOrder
@@ -16530,6 +16565,16 @@ export namespace Prisma {
     bookId?: SortOrder
     name?: SortOrder
     type?: SortOrder
+  }
+
+  export type EnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
   }
 
   export type AccountScalarRelationFilter = {
@@ -17387,6 +17432,10 @@ export namespace Prisma {
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
   }
 
+  export type EnumTransactionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TransactionType
+  }
+
   export type BookUpdateOneRequiredWithoutCategoriesNestedInput = {
     create?: XOR<BookCreateWithoutCategoriesInput, BookUncheckedCreateWithoutCategoriesInput>
     connectOrCreate?: BookCreateOrConnectWithoutCategoriesInput
@@ -17808,6 +17857,23 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedEnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
+  export type NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -18099,7 +18165,7 @@ export namespace Prisma {
   export type CategoryCreateWithoutBookInput = {
     id?: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     transactions?: TransactionCreateNestedManyWithoutCategoryInput
     budgets?: BudgetCreateNestedManyWithoutCategoryInput
   }
@@ -18107,7 +18173,7 @@ export namespace Prisma {
   export type CategoryUncheckedCreateWithoutBookInput = {
     id?: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     transactions?: TransactionUncheckedCreateNestedManyWithoutCategoryInput
     budgets?: BudgetUncheckedCreateNestedManyWithoutCategoryInput
   }
@@ -18267,7 +18333,7 @@ export namespace Prisma {
     id?: UuidFilter<"Category"> | string
     bookId?: UuidFilter<"Category"> | string
     name?: StringFilter<"Category"> | string
-    type?: StringFilter<"Category"> | string
+    type?: EnumTransactionTypeFilter<"Category"> | $Enums.TransactionType
   }
 
   export type MemberUpsertWithWhereUniqueWithoutBookInput = {
@@ -18809,7 +18875,7 @@ export namespace Prisma {
   export type CategoryCreateWithoutTransactionsInput = {
     id?: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     book: BookCreateNestedOneWithoutCategoriesInput
     budgets?: BudgetCreateNestedManyWithoutCategoryInput
   }
@@ -18818,7 +18884,7 @@ export namespace Prisma {
     id?: string
     bookId: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     budgets?: BudgetUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -18894,7 +18960,7 @@ export namespace Prisma {
   export type CategoryUpdateWithoutTransactionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     book?: BookUpdateOneRequiredWithoutCategoriesNestedInput
     budgets?: BudgetUpdateManyWithoutCategoryNestedInput
   }
@@ -18903,7 +18969,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     budgets?: BudgetUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -19083,7 +19149,7 @@ export namespace Prisma {
   export type CategoryCreateWithoutBudgetsInput = {
     id?: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     book: BookCreateNestedOneWithoutCategoriesInput
     transactions?: TransactionCreateNestedManyWithoutCategoryInput
   }
@@ -19092,7 +19158,7 @@ export namespace Prisma {
     id?: string
     bookId: string
     name: string
-    type: string
+    type: $Enums.TransactionType
     transactions?: TransactionUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -19148,7 +19214,7 @@ export namespace Prisma {
   export type CategoryUpdateWithoutBudgetsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     book?: BookUpdateOneRequiredWithoutCategoriesNestedInput
     transactions?: TransactionUpdateManyWithoutCategoryNestedInput
   }
@@ -19157,7 +19223,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     bookId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     transactions?: TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -19505,7 +19571,7 @@ export namespace Prisma {
   export type CategoryCreateManyBookInput = {
     id?: string
     name: string
-    type: string
+    type: $Enums.TransactionType
   }
 
   export type MemberCreateManyBookInput = {
@@ -19560,7 +19626,7 @@ export namespace Prisma {
   export type CategoryUpdateWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     transactions?: TransactionUpdateManyWithoutCategoryNestedInput
     budgets?: BudgetUpdateManyWithoutCategoryNestedInput
   }
@@ -19568,7 +19634,7 @@ export namespace Prisma {
   export type CategoryUncheckedUpdateWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
     transactions?: TransactionUncheckedUpdateManyWithoutCategoryNestedInput
     budgets?: BudgetUncheckedUpdateManyWithoutCategoryNestedInput
   }
@@ -19576,7 +19642,7 @@ export namespace Prisma {
   export type CategoryUncheckedUpdateManyWithoutBookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
   }
 
   export type MemberUpdateWithoutBookInput = {

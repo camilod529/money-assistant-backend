@@ -68,11 +68,11 @@ model Account {
 }
 
 model Category {
-  id           String        @id @default(uuid()) @db.Uuid
-  book         Book          @relation(fields: [bookId], references: [id])
-  bookId       String        @db.Uuid
+  id           String          @id @default(uuid()) @db.Uuid
+  book         Book            @relation(fields: [bookId], references: [id])
+  bookId       String          @db.Uuid
   name         String
-  type         String // "income" o "expense"
+  type         TransactionType
   transactions Transaction[]
   budgets      Budget[]
 }
@@ -154,4 +154,11 @@ enum Role {
   EDITOR
   CONTRIBUTOR
   VIEWER
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  ADJUSTMENT
+  TRANSFER
 }
