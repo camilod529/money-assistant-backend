@@ -2,6 +2,7 @@ import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/commo
 import { Prisma, TransactionType } from '../../generated/prisma/index';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { GetTransactionsFiltersDto } from './dto/get-transactions-filter.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { TransactionEntity } from './entities/transaction.entity';
 
@@ -10,7 +11,7 @@ export class TransactionsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(bookId: string, dto: CreateTransactionDto) {
-    await this.validateAccountAndCategoryBelongToBook(bookId, dto.accountId, dto.categoryId);
+    const category = await this.validateAccountAndCategoryBelongToBook(bookId, dto.accountId, dto.categoryId);
 
     const transaction = await this.prisma.transaction.create({
       data: {
@@ -22,10 +23,22 @@ export class TransactionsService {
       },
     });
 
+    const isExpense = category.type === TransactionType.EXPENSE;
+    const delta = isExpense ? -dto.amount : dto.amount;
+
+    await this.prisma.account.update({
+      where: { id: dto.accountId },
+      data: {
+        balance: {
+          increment: delta,
+        },
+      },
+    });
+
     return new TransactionEntity(transaction);
   }
 
-  async findAll(bookId: string, filters: { from?: string; to?: string; type?: TransactionType }) {
+  async findAll(bookId: string, filters: GetTransactionsFiltersDto) {
     const { from, to, type } = filters;
     const where: Prisma.TransactionWhereInput = {
       account: { bookId },
@@ -112,5 +125,7 @@ export class TransactionsService {
     if (!category || category.bookId !== bookId) {
       throw new ForbiddenException('Category does not belong to the specified book');
     }
+
+    return category;
   }
 }
